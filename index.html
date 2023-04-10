@@ -9,9 +9,18 @@
   </head>
   <body>
     <h1>Checklist</h1>
+
     <main class="container">
-      <article class="list"></article>
-      <article class="check"></article>
+      <input
+        type="text"
+        id="addToList"
+        class="addTextBox"
+        placeholder="Add..."
+      />
+      <span class="addButton" onclick="newItem()">Add</span>
+      <ul id="list">
+        <li>do stuff</li>
+      </ul>
     </main>
     <script src="checklist.js"></script>
   </body>
