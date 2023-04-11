@@ -35,7 +35,7 @@ const deleteItem = (index) => {
     localStorage.tasks = JSON.stringify(tasks);
     renderList();
   } else {
-    alert("error");
+    alert("Error");
   }
 };
 // from w3schools
