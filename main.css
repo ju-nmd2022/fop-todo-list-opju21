@@ -4,35 +4,45 @@
 
 h1 {
   text-align: center;
+  text-transform: uppercase;
 }
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-li {
-  background-color: rgb(239, 248, 255);
-  padding: 10px;
-  border-radius: 20px;
-  cursor: pointer;
-  position: relative;
-}
+
 .container {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  grid-template-rows: 50px 1fr;
+  grid-template-rows: 40px 1fr;
 }
-.addTextBox {
+.content {
   grid-area: 1/2/2/3;
-  justify-self: center;
-  align-self: center;
+  justify-self: stretch;
+  align-self: stretch;
+  border-radius: 20px;
+  padding-left: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
+  border: 2px solid rgb(239, 248, 255);
+
   /*place-self: center stretch;*/
+}
+input[type="text"]:focus {
+  background-color: rgb(249, 252, 255);
+  outline: none;
 }
 
 .addButton {
   grid-area: 1/2/2/3;
   justify-self: end;
-  align-self: center;
+  align-self: stretch;
+  border: none;
+  background-color: rgb(239, 248, 255);
+  width: 10%;
+  border-radius: 0 20px 20px 0;
+  margin-right: 15px;
+  cursor: pointer;
+}
+.addButton:hover {
+  background-color: rgb(218, 224, 230);
+  color: white;
 }
 
 #list {
@@ -44,7 +54,37 @@ li {
   align-items: stretch;
   row-gap: 10px;
 }
-.close {
-  position: absolute;
-  right: 0;
+
+ul li {
+  background-color: rgb(239, 248, 255);
+  padding: 10px;
+  border-radius: 20px;
+  cursor: pointer;
+
+  list-style-type: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
+/*.checked {
+  align-self: center;
+  justify-self: center;
+  background-color: #3c7949;
+  border: none;
+  background-color: #3c4979;
+  font-size: 16px;
+
+  background-color: rgb(239, 248, 255);
+  padding-left: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 0;
+  align-self: stretch;
+  justify-self: stretch;
+}
+
+.close {
+  background-color: #3c7949;
+  border-radius: 0 20px 20px 0;
+}*/

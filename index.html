@@ -13,13 +13,13 @@
     <main class="container">
       <input
         type="text"
-        id="addToList"
-        class="addTextBox"
-        placeholder="Add..."
+        class="content"
+        id="input"
+        placeholder="Add to list here..."
       />
-      <span class="addButton" onclick="newItem()">Add</span>
+      <button class="addButton" onclick="newItemToList()">&plus;</button>
       <ul id="list">
-        <li>do stuff</li>
+        <li class="checked">Exercise</li>
       </ul>
     </main>
     <script src="checklist.js"></script>
