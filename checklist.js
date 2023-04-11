@@ -6,8 +6,18 @@ let list = document.getElementById("list");
 const renderList = () => {
   list.innerHTML = ``;
   for (let i = 0; i < tasks.length; i++) {
-    list.innerHTML += `<li><div class="listText">${tasks[i]}</div> <div class="close" onclick="deleteItem(${i})">x</div></li>`;
+    list.innerHTML += `<li type="checkbox"  ><div class="listText">${tasks[i]}</div> <div class="close" onclick="deleteItem(${i})">x</div></li>`;
   }
+  // from w3schools
+  list.addEventListener(
+    "click",
+    function (ev) {
+      if (ev.target.tagName === "LI") {
+        ev.target.classList.toggle("checked");
+      }
+    },
+    false
+  );
 };
 renderList();
 
@@ -38,13 +48,3 @@ const deleteItem = (index) => {
     alert("Error");
   }
 };
-// from w3schools
-list.addEventListener(
-  "click",
-  function (ev) {
-    if (ev.target.tagName === "LI") {
-      ev.target.classList.toggle("checked");
-    }
-  },
-  false
-);
