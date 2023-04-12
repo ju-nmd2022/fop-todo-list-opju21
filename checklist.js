@@ -6,21 +6,29 @@ let list = document.getElementById("list");
 const renderList = () => {
   list.innerHTML = ``;
   for (let i = 0; i < tasks.length; i++) {
-    list.innerHTML += `<li type="checkbox"  ><div class="listText">${tasks[i]}</div> <div class="close" onclick="deleteItem(${i})">x</div></li>`;
+    const checked = tasks[i].checked ? "checked" : "";
+    list.innerHTML += `<li type="checkbox" class="${checked}"  data-checked="${tasks[i].checked}"><span class="listText">${tasks[i].text}</span> <div class="close" onclick="deleteItem(${i})">x</div></li>`;
   }
-  // from w3schools
-  list.addEventListener(
-    "click",
-    function (ev) {
-      if (ev.target.tagName === "LI") {
-        ev.target.classList.toggle("checked");
-      }
-    },
-    false
-  );
 };
 renderList();
+// from w3schools
+list.addEventListener(
+  "click",
+  function (ev) {
+    if (ev.target.tagName === "LI") {
+      ev.target.classList.toggle("checked");
 
+      // to solve this i used chatgpt bc i was lost af
+      const index = Array.from(list.children).indexOf(ev.target);
+      const li = list.children[index];
+      const isChecked = li.classList.contains("checked");
+      tasks[index].checked = isChecked;
+      tasks[index].text = ev.target.querySelector(".listText").textContent;
+      localStorage.tasks = JSON.stringify(tasks);
+    }
+  },
+  false
+);
 function newItemToList() {
   const li = document.createElement("li");
   const inputValue = document.getElementById("input").value;
@@ -31,7 +39,7 @@ function newItemToList() {
     alert("Error");
   } else {
     document.getElementById("list").appendChild(li);
-    tasks.push(inputValue);
+    tasks.push({ text: inputValue, checked: false });
     localStorage.tasks = JSON.stringify(tasks);
   }
 
