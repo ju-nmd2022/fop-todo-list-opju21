@@ -17,5 +17,6 @@ input.addEventListener("keypress", function (event) {
     input.value = " "; // makes the input feild blank after use
   }
 });
+localStorage.setItem("list", listedTasksJsonString);
 
 // CHECK MARK FUNCTION
