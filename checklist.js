@@ -1,18 +1,10 @@
-let input = document.getElementById("addInput"); // the input feild id made into a value
+let listedTasks = [];
+let listedTasksJsonString = JSON.stringify(listedTasks);
+localStorage.setItem("list", listedTasksJsonString);
+
 let listed = document.getElementById("listedItems"); // makes the ul with id listedItems to a value
 
 // ADD CLOSE BUTTON FUNCTION
-function addCloseButton(newListItem) {
-  const closeButton = document.createElement("button"); // this creates an btton element
-
-  closeButton.className = "deleteItemClass"; //This gives it a class
-  closeButton.innerText = "X"; //this just makes the x in the button
-
-  closeButton.addEventListener("click", function () {
-    listed.removeChild(newListItem); //if button is pressed this takes away the element / listitem
-  });
-  newListItem.appendChild(closeButton); // connects the closebutton to the list item
-}
 
 // ADD TO LIST FUNCTION
 input.addEventListener("keypress", function (event) {
@@ -23,15 +15,7 @@ input.addEventListener("keypress", function (event) {
     newListItem.appendChild(node); // puts the text just made into the list element
     listed.appendChild(newListItem); // makes so the list element is in the ul element which is stated in the beginning
     input.value = " "; // makes the input feild blank after use
-    addCloseButton(newListItem); //connects the list item to a close button
   }
 });
-
-let listItemsGiveClose = document.getElementsByTagName("li"); // looks att all the li elements
-
-for (let i = 0; i < listItemsGiveClose.length; i++) {
-  //adds closebuttons to existing elements
-  addCloseButton(listItemsGiveClose[i]);
-}
 
 // CHECK MARK FUNCTION

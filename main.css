@@ -4,3 +4,10 @@
 .deleteItemClass {
   background-color: blue;
 }
+li.checked {
+  color: aquamarine;
+}
+li {
+  background-color: blueviolet;
+  cursor: pointer;
+}
