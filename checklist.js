@@ -1,6 +1,7 @@
 let input = document.getElementById("addInput"); // the input feild id made into a value
 let listed = document.getElementById("listedItems"); // makes the ul with id listedItems to a value
 
+// ADD CLOSE BUTTON FUNCTION
 function addCloseButton(newListItem) {
   const closeButton = document.createElement("button"); // this creates an btton element
 
@@ -13,6 +14,7 @@ function addCloseButton(newListItem) {
   newListItem.appendChild(closeButton); // connects the closebutton to the list item
 }
 
+// ADD TO LIST FUNCTION
 input.addEventListener("keypress", function (event) {
   if (event.key === "Enter") {
     let newListItem = document.createElement("li"); // creates a list element
@@ -25,9 +27,11 @@ input.addEventListener("keypress", function (event) {
   }
 });
 
-let listItems = document.getElementsByTagName("li"); // looks att all the li elements
+let listItemsGiveClose = document.getElementsByTagName("li"); // looks att all the li elements
 
-for (let i = 0; i < listItems.length; i++) {
+for (let i = 0; i < listItemsGiveClose.length; i++) {
   //adds closebuttons to existing elements
-  addCloseButton(listItems[i]);
+  addCloseButton(listItemsGiveClose[i]);
 }
+
+// CHECK MARK FUNCTION
