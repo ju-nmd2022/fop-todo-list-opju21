@@ -2,3 +2,11 @@ li {
   background-color: rgb(202, 182, 220);
   cursor: pointer;
 }
+li:hover {
+  background-color: rgb(180, 215, 204);
+}
+.checked {
+  color: blue;
+  background-color: aqua;
+  text-decoration: line-through;
+}
