@@ -1,4 +1,4 @@
-let listed = document.getElementById("listedItems"); // makes the ul with id listedItems to a value
+let listed = document.getElementById("listedItems");
 
 // LIST FUNCTION
 input.addEventListener("keypress", function (event) {
@@ -8,5 +8,6 @@ input.addEventListener("keypress", function (event) {
     let textNode = document.createTextNode(input);
     list.appendChild(textNode);
     listed.appendChild(list);
+    document.getElementById("addInput").value = "";
   }
 });
