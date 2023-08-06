@@ -21,6 +21,9 @@ function renderListedTaskArray() {
       list.classList.add("checked");
     }
     listed.appendChild(list);
+    let deleteButton = document.createElement("button");
+    deleteButton.innerHTML = "Delete";
+    list.appendChild(deleteButton);
   }
   listedTaskArray = parsedListedTaskArray;
 }
@@ -54,6 +57,16 @@ input.addEventListener("keypress", function (event) {
     listedTaskArray.push(arrayNewTask);
     localStorage.setItem("todoList", JSON.stringify(listedTaskArray));
     input.value = "";
+    renderListedTaskArray();
+  }
+});
+
+/// DELETE BUTTON DELETES
+listed.addEventListener("click", function (ev) {
+  if (ev.target.tagName === "BUTTON") {
+    const taskIndex = Array.from(listed.children).indexOf(ev.target.parentNode);
+    listedTaskArray.splice(taskIndex, 1);
+    localStorage.setItem("todoList", JSON.stringify(listedTaskArray));
     renderListedTaskArray();
   }
 });
