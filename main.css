@@ -1,13 +1,4 @@
-.addInput {
-  color: aqua;
-}
-.deleteItemClass {
-  background-color: blue;
-}
-li.checked {
-  color: aquamarine;
-}
 li {
-  background-color: blueviolet;
+  background-color: rgb(202, 182, 220);
   cursor: pointer;
 }
