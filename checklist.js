@@ -1,37 +1,35 @@
 // for clarification, chatGPT have been used to error check and assisted in explaining the writen code
-//so its been though the chat severall times to help find a problem
+//so its been though the chat severall times to help find a problem with the spelling, typos and missing values
 
 let listedTaskArray = JSON.parse(localStorage.getItem("todoList"));
+let jsonStringListedTaskArray = JSON.stringify(listedTaskArray);
+let listed = document.getElementById("listedItems");
+let input = document.getElementById("addInput");
+
 if (!listedTaskArray) {
   listedTaskArray = [];
   localStorage.setItem("todoList", JSON.stringify(listedTaskArray));
 }
 
-let jsonStringListedTaskArray = JSON.stringify(listedTaskArray);
-let listed = document.getElementById("listedItems");
-let input = document.getElementById("addInput");
-
 ///LOAD THE LIST
 function renderListedTaskArray() {
   listed.innerHTML = "";
-  let parsedListedTaskArray = JSON.parse(localStorage.getItem("todoList"));
 
-  for (let i = 0; i < parsedListedTaskArray.length; i++) {
+  for (let i = 0; i < listedTaskArray.length; i++) {
     let list = document.createElement("li");
-
     input.classList.add("listClass");
-    let arrayTextNode = document.createTextNode(parsedListedTaskArray[i].text);
+    let arrayTextNode = document.createTextNode(listedTaskArray[i].text);
     list.appendChild(arrayTextNode);
-    if (parsedListedTaskArray[i].checked) {
+    if (listedTaskArray[i].checked) {
       list.classList.add("checked");
     }
     listed.appendChild(list);
+    ///add a delete button to new list items
     let deleteButton = document.createElement("button");
     deleteButton.innerHTML = "Delete";
     deleteButton.classList.add("buttonClass");
     list.appendChild(deleteButton);
   }
-  listedTaskArray = parsedListedTaskArray;
 }
 renderListedTaskArray();
 
