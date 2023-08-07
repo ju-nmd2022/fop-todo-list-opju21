@@ -1,77 +1,80 @@
-document.addEventListener("DOMContentLoaded", function () {
-  let listedTaskArray = JSON.parse(localStorage.getItem("todoList"));
-  if (!listedTaskArray) {
-    listedTaskArray = [];
-    localStorage.setItem("todoList", JSON.stringify(listedTaskArray));
-  }
-  let jsonStringListedTaskArray = JSON.stringify(listedTaskArray);
-  let listed = document.getElementById("listedItems");
+// for clarification, chatGPT have been used to error check and assisted in explaining the writen code
+//so its been though the chat severall times to help find a problem
 
-  let input = document.getElementById("addInput");
-  ///LOAD THE LIST
-  function renderListedTaskArray() {
-    listed.innerHTML = "";
-    const storedListedTaskArray = localStorage.getItem("todoList");
-    const parsedListedTaskArray = JSON.parse(storedListedTaskArray);
+let listedTaskArray = JSON.parse(localStorage.getItem("todoList"));
+if (!listedTaskArray) {
+  listedTaskArray = [];
+  localStorage.setItem("todoList", JSON.stringify(listedTaskArray));
+}
 
-    for (let i = 0; i < parsedListedTaskArray.length; i++) {
-      let list = document.createElement("li");
-      let arrayTextNode = document.createTextNode(
-        parsedListedTaskArray[i].text
-      );
-      list.appendChild(arrayTextNode);
-      if (parsedListedTaskArray[i].checked) {
-        list.classList.add("checked");
-      }
-      listed.appendChild(list);
-      let deleteButton = document.createElement("button");
-      deleteButton.innerHTML = "Delete";
-      list.appendChild(deleteButton);
+let jsonStringListedTaskArray = JSON.stringify(listedTaskArray);
+let listed = document.getElementById("listedItems");
+let input = document.getElementById("addInput");
+
+///LOAD THE LIST
+function renderListedTaskArray() {
+  listed.innerHTML = "";
+  let parsedListedTaskArray = JSON.parse(localStorage.getItem("todoList"));
+
+  for (let i = 0; i < parsedListedTaskArray.length; i++) {
+    let list = document.createElement("li");
+
+    input.classList.add("listClass");
+    let arrayTextNode = document.createTextNode(parsedListedTaskArray[i].text);
+    list.appendChild(arrayTextNode);
+    if (parsedListedTaskArray[i].checked) {
+      list.classList.add("checked");
     }
-    listedTaskArray = parsedListedTaskArray;
+    listed.appendChild(list);
+    let deleteButton = document.createElement("button");
+    deleteButton.innerHTML = "Delete";
+    deleteButton.classList.add("buttonClass");
+    list.appendChild(deleteButton);
   }
-  renderListedTaskArray();
+  listedTaskArray = parsedListedTaskArray;
+}
+renderListedTaskArray();
 
-  ///CHECKMARK
-  listed.addEventListener(
-    "click",
-    function (ev) {
-      if (ev.target.tagName === "LI") {
-        ev.target.classList.toggle("checked");
-        const taskIndex = Array.from(listed.children).indexOf(ev.target);
-        const checkmark = ev.target.classList.contains("checked");
-        listedTaskArray[taskIndex].checked = checkmark;
+///CHECKMARK
+listed.addEventListener(
+  "click",
+  function (event) {
+    if (event.target.tagName === "LI") {
+      event.target.classList.toggle("checked");
+      let taskIndex = Array.from(listed.children).indexOf(event.target);
+      let checkmark = event.target.classList.contains("checked");
+      listedTaskArray[taskIndex].checked = checkmark;
 
-        localStorage.setItem("todoList", JSON.stringify(listedTaskArray));
-      }
-    },
-    false
-  );
-  ////// ADD TO LIST FUNCTION
-  input.addEventListener("keypress", function (event) {
-    if (event.key === "Enter") {
-      let list = document.createElement("li");
-      let inputValue = input.value;
-      let textNode = document.createTextNode(inputValue);
-      list.appendChild(textNode);
+      localStorage.setItem("todoList", JSON.stringify(listedTaskArray));
+    }
+  },
+  false
+);
+////// ADD TO LIST FUNCTION
+input.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    let list = document.createElement("li");
+    let inputValue = document.getElementById("addInput").value;
+    if (!inputValue) {
+      alert("You need to write something");
+    } else {
+      list.appendChild(document.createTextNode(inputValue));
       listed.appendChild(list);
-      let arrayNewTask = { text: inputValue, checked: false };
-      listedTaskArray.push(arrayNewTask);
+      input.classList.add("listClass");
+      listedTaskArray.push({ text: inputValue, checked: false });
       localStorage.setItem("todoList", JSON.stringify(listedTaskArray));
       input.value = "";
-      renderListedTaskArray();
     }
-  });
+    renderListedTaskArray();
+  }
+});
 
-  /// DELETE BUTTON DELETES
-  listed.addEventListener("click", function (ev) {
-    if (ev.target.tagName === "BUTTON") {
-      const taskIndex = Array.from(listed.children).indexOf(
-        ev.target.parentNode
-      );
-      listedTaskArray.splice(taskIndex, 1);
-      localStorage.setItem("todoList", JSON.stringify(listedTaskArray));
-      renderListedTaskArray();
-    }
-  });
+/// DELETE BUTTON DELETES
+listed.addEventListener("click", function (ev) {
+  if (ev.target.tagName === "BUTTON") {
+    let taskIndex = Array.from(listed.children).indexOf(ev.target.parentNode);
+    listedTaskArray.splice(taskIndex, 1);
+    localStorage.setItem("todoList", JSON.stringify(listedTaskArray));
+    renderListedTaskArray();
+  }
 });
